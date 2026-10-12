@@ -48,7 +48,7 @@ function SortableItem({ id, showHandle, children }: SortableItemProps) {
         <div
           {...attributes}
           {...listeners}
-          className="absolute left-1 top-3 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition text-zinc-400 hover:text-zinc-600 z-10"
+          className="absolute left-1 top-3 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300 z-10"
         >
           <GripVertical size={14} />
         </div>

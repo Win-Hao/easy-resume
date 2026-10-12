@@ -10,8 +10,10 @@ import { MinimalTemplate } from "@/components/templates/minimal";
 import { ExecutiveTemplate } from "@/components/templates/executive";
 import { FreshTemplate } from "@/components/templates/fresh";
 import { AppleTemplate } from "@/components/templates/apple";
+import { StandardTemplate } from "@/components/templates/standard";
 import { Button } from "@/components/ui/button";
 import { ColorPicker } from "@/components/editor/color-picker";
+import { ThemeToggle } from "@/components/editor/theme-toggle";
 import { Download, FileText, RotateCcw, LayoutTemplate } from "lucide-react";
 
 const templates = [
@@ -21,6 +23,7 @@ const templates = [
   { id: "executive", name: "商务", component: ExecutiveTemplate },
   { id: "fresh", name: "活力", component: FreshTemplate },
   { id: "apple", name: "苹果", component: AppleTemplate },
+  { id: "standard", name: "标准", component: StandardTemplate },
 ] as const;
 
 type TemplateId = (typeof templates)[number]["id"];
@@ -76,27 +79,27 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-100">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950">
       {/* Top Bar */}
-      <header className="no-print sticky top-0 z-50 bg-white border-b border-zinc-200 px-6 py-3 flex items-center justify-between shadow-sm">
+      <header className="no-print sticky top-0 z-50 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-6 py-3 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-2">
           <FileText size={20} className="text-[var(--accent)]" />
-          <h1 className="text-lg font-bold text-zinc-900">Easy Resume</h1>
-          <span className="text-xs text-zinc-400 ml-1">在线简历编辑器</span>
+          <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">Easy Resume</h1>
+          <span className="text-xs text-zinc-400 dark:text-zinc-500 ml-1">在线简历编辑器</span>
         </div>
 
         {/* Template Switcher + Color Picker */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 bg-zinc-100 rounded-lg p-0.5">
-            <LayoutTemplate size={14} className="text-zinc-400 ml-2 mr-1" />
+          <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg p-0.5">
+            <LayoutTemplate size={14} className="text-zinc-400 dark:text-zinc-500 ml-2 mr-1" />
             {templates.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setTemplateId(t.id)}
                 className={`px-3 py-1 rounded-md text-xs font-medium transition ${
                   templateId === t.id
-                    ? "bg-white text-zinc-900 shadow-sm"
-                    : "text-zinc-500 hover:text-zinc-700"
+                    ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm"
+                    : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
                 }`}
               >
                 {t.name}
@@ -104,6 +107,7 @@ export default function Home() {
             ))}
           </div>
           <ColorPicker value={accentColor} onChange={setAccentColor} />
+          <ThemeToggle />
         </div>
 
         <div className="flex items-center gap-2">
@@ -127,12 +131,12 @@ export default function Home() {
       {/* Main Content: Editor + Preview */}
       <div className="no-print flex">
         {/* Left: Editor */}
-        <div className="w-[440px] h-[calc(100vh-57px)] overflow-y-auto bg-white border-r border-zinc-200 flex-shrink-0">
+        <div className="w-[440px] h-[calc(100vh-57px)] overflow-y-auto bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800 flex-shrink-0">
           <ResumeEditor data={data} onChange={setData} />
         </div>
 
         {/* Right: Preview */}
-        <div className="flex-1 h-[calc(100vh-57px)] overflow-y-auto flex justify-center py-8 bg-zinc-100">
+        <div className="flex-1 h-[calc(100vh-57px)] overflow-y-auto flex justify-center py-8 bg-zinc-100 dark:bg-zinc-950">
           <div ref={previewRef} className="shadow-lg" style={{ "--accent": accentColor, "--accent-light": accentColor + "18" } as React.CSSProperties}>
             <TemplateComponent data={data} />
           </div>

@@ -28,17 +28,17 @@ export function ColorPicker({ value, onChange }: ColorPickerProps) {
     <Popover>
       <PopoverTrigger
         render={
-          <button className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 transition text-xs text-zinc-600" />
+          <button className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition text-xs text-zinc-600 dark:text-zinc-300" />
         }
       >
         <div
-          className="w-4 h-4 rounded-full border border-white shadow-sm"
+          className="w-4 h-4 rounded-full border border-white dark:border-zinc-600 shadow-sm"
           style={{ backgroundColor: value }}
         />
         <Palette size={13} />
       </PopoverTrigger>
       <PopoverContent className="w-[220px] p-3" align="center">
-        <div className="text-xs font-medium text-zinc-500 mb-2">选择主题色</div>
+        <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400 mb-2">选择主题色</div>
         <div className="grid grid-cols-4 gap-2">
           {presetColors.map((color) => (
             <button
@@ -50,17 +50,17 @@ export function ColorPicker({ value, onChange }: ColorPickerProps) {
               <div
                 className={`w-9 h-9 rounded-lg transition shadow-sm hover:scale-110 ${
                   value === color.value
-                    ? "ring-2 ring-offset-2 ring-zinc-900"
+                    ? "ring-2 ring-offset-2 ring-offset-popover ring-zinc-900 dark:ring-zinc-100"
                     : ""
                 }`}
                 style={{ backgroundColor: color.value }}
               />
-              <span className="text-[10px] text-zinc-400 leading-none">{color.name}</span>
+              <span className="text-[10px] text-zinc-400 dark:text-zinc-500 leading-none">{color.name}</span>
             </button>
           ))}
         </div>
-        <div className="mt-3 pt-2 border-t border-zinc-100">
-          <div className="text-[10px] text-zinc-400 mb-1">自定义颜色</div>
+        <div className="mt-3 pt-2 border-t border-zinc-100 dark:border-zinc-700">
+          <div className="text-[10px] text-zinc-400 dark:text-zinc-500 mb-1">自定义颜色</div>
           <input
             type="color"
             value={value}

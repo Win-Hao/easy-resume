@@ -132,13 +132,38 @@
 :root {
   --accent: #D97757;
   --accent-light: #fdf0eb;
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
 }
 
 @media print {
+  /* 纸张即简历：首页不加浏览器边距，留白全部由模板内边距控制；
+     续页上下留出 12mm 呼吸空间，左右保持 0 以免内容被缩放 */
+  @page {
+    size: A4;
+    margin: 12mm 0;
+  }
+  @page :first {
+    margin: 0;
+  }
   .no-print {
     display: none !important;
   }
+  /* 深色模式下打印仍输出白底简历 */
+  html {
+    color-scheme: light;
+  }
+  html,
   body {
-    background: white;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+  /* 编辑器外壳的底色不参与打印 */
+  body > * {
+    background: transparent !important;
   }
 }
